@@ -38,16 +38,33 @@ public class Main {
 		}
 		else if (annualEarnings >= lowestTaxBracket && annualEarnings < midTaxBracket) {
 			double highTaxed = annualEarnings - (lowestTaxBracket);		
-			System.out.println(highTaxed);
 			
 			highTaxed = highTaxed * 0.4;
-			System.out.println(highTaxed);
 			
 			double lowTaxed = lowestTaxBracket - personalAllowance;
 			
 			lowTaxed = lowTaxed * 0.2;
 			
 			annualEarnings = annualEarnings - highTaxed - lowTaxed;
+			
+			System.out.println("Your yearly salary is £" + (annualEarnings));
+			System.out.println("You earn £" + (annualEarnings / 12) + " per month");
+			
+		}
+		else if (annualEarnings >= midTaxBracket) {
+			double highTaxed = annualEarnings - midTaxBracket;
+			
+			highTaxed = highTaxed * 0.45;
+			
+			double midTaxed = midTaxBracket - lowestTaxBracket;
+			
+			midTaxed = midTaxed * 0.4;
+			
+			double lowTaxed = lowestTaxBracket - personalAllowance;
+			
+			lowTaxed = lowTaxed * 0.2;
+
+			annualEarnings = annualEarnings - (highTaxed + midTaxed + lowTaxed);
 			
 			System.out.println("Your yearly salary is £" + (annualEarnings));
 			System.out.println("You earn £" + (annualEarnings / 12) + " per month");
