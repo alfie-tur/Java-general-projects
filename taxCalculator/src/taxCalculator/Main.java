@@ -26,6 +26,7 @@ public class Main {
 			System.out.println("Your yearly salary is £" + annualEarnings);
 			System.out.println("You earn £" + (annualEarnings/12) + " per month");
 		}
+		
 		else if (annualEarnings > personalAllowance && annualEarnings < lowestTaxBracket) {
 			double taxedAmount = annualEarnings - personalAllowance;
 			
@@ -36,26 +37,37 @@ public class Main {
 			System.out.println("Your yearly salary is £" + (annualEarnings));
 			System.out.println("You earn £" + (annualEarnings / 12) + " per month");
 		}
+		
 		else if (annualEarnings >= lowestTaxBracket && annualEarnings < midTaxBracket) {
 			
+			double newPersonalAllowance = 0;
 			if (annualEarnings >= 100000) { //Your personal allowance goes down by £1 for every £2 that your adjusted net income is above £100,000. This means your allowance is zero if your income is £125,140 or above.
 				double personalAllowanceCalculation = annualEarnings - 100000;
 				personalAllowanceCalculation = personalAllowanceCalculation / 2;
-				personalAllowance = personalAllowance - personalAllowanceCalculation;
+				newPersonalAllowance = personalAllowance - personalAllowanceCalculation;
 			}
-			System.out.println("Personal Allowance: " + personalAllowance);
+			System.out.println("Personal Allowance: " + newPersonalAllowance);
+			annualEarnings = annualEarnings - newPersonalAllowance;
 			
-			double highTaxed = annualEarnings - (lowestTaxBracket);		
 			
-			highTaxed = highTaxed * 0.4;
 			
-			double lowTaxed = lowestTaxBracket - personalAllowance;
+			
+			double lowTaxed = lowestTaxBracket - personalAllowance; // 50270 - 12570 = 37,700 
+			
+			
+			double highTaxed = annualEarnings - lowTaxed; //124930 - 50270 = 74,660
+			System.out.println("amount to be taxed 40%: " + highTaxed);
+			highTaxed = highTaxed * 0.4; //40% of 74,660 = 29,864 != 34,888
+			System.out.println("tax at 40%: " + highTaxed);
+			
 			
 			lowTaxed = lowTaxed * 0.2;
 			
-			annualEarnings = annualEarnings - highTaxed - lowTaxed;
 			
-			System.out.println("Your yearly salary is £" + (annualEarnings));
+			annualEarnings = annualEarnings - (highTaxed + lowTaxed);
+			
+			
+			System.out.println("Your yearly salary is £" + (annualEarnings + newPersonalAllowance));
 			System.out.println("You earn £" + (annualEarnings / 12) + " per month");
 			
 		}
