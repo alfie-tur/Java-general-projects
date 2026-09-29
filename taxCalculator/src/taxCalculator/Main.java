@@ -50,19 +50,17 @@ public class Main {
 			annualEarnings = annualEarnings - newPersonalAllowance;
 			
 			
+			double lowTaxed = lowestTaxBracket - personalAllowance;
+			System.out.println("low amount: " + lowTaxed);
 			
+			double highTaxed = annualEarnings - lowTaxed; 
+			System.out.println("top amount to be taxed: " + highTaxed);
 			
-			double lowTaxed = lowestTaxBracket - personalAllowance; // 50270 - 12570 = 37,700 
-			
-			
-			double highTaxed = annualEarnings - lowTaxed; //124930 - 50270 = 74,660
-			System.out.println("amount to be taxed 40%: " + highTaxed);
-			highTaxed = highTaxed * 0.4; //40% of 74,660 = 29,864 != 34,888
-			System.out.println("tax at 40%: " + highTaxed);
-			
+			highTaxed = highTaxed * 0.4;
+			System.out.println("top tax: " + highTaxed);
 			
 			lowTaxed = lowTaxed * 0.2;
-			
+			System.out.println("low tax: " + lowTaxed);
 			
 			annualEarnings = annualEarnings - (highTaxed + lowTaxed);
 			
@@ -75,29 +73,42 @@ public class Main {
 			
 			double personalAllowanceCalculation = annualEarnings - 100000;
 			personalAllowanceCalculation = personalAllowanceCalculation / 2;
-			personalAllowance = personalAllowance - personalAllowanceCalculation;
-			System.out.println("Personal allowance: " + personalAllowance);
-			
-			double highTaxed = annualEarnings - midTaxBracket;
-			
-			highTaxed = highTaxed * 0.45;
-			
-			double midTaxed = midTaxBracket - lowestTaxBracket;
-			
-			midTaxed = midTaxed * 0.4;
-			
-			if (personalAllowance < 0) {
-				personalAllowance = 0;
+			double newPersonalAllowance = personalAllowance - personalAllowanceCalculation;
+			System.out.println("Personal allowance: " + newPersonalAllowance);
+
+			if (newPersonalAllowance < 0) {
+				newPersonalAllowance = 0;
 			}
-			System.out.println(personalAllowance);
+			
+			annualEarnings = annualEarnings - newPersonalAllowance;
 			
 			double lowTaxed = lowestTaxBracket - personalAllowance;
+			System.out.println("low amount: " + lowTaxed);
+			
+			double midTaxed = midTaxBracket - lowTaxed;
+			System.out.println("mid amount to be taxed: " + midTaxed);
+			
+			System.out.println(annualEarnings);
+			double highTaxed = annualEarnings - midTaxBracket;
+			System.out.println("top amount to be taxed: " + highTaxed);
+			
+			
+			System.out.println();
+			
+			
+			highTaxed = highTaxed * 0.45;
+			System.out.println("top tax: " + highTaxed);
+			
+			midTaxed = midTaxed * 0.4;
+			System.out.println("mid tax: " + midTaxed);
 			
 			lowTaxed = lowTaxed * 0.2;
-
+			System.out.println("low tax: " + lowTaxed);
+			
+			
 			annualEarnings = annualEarnings - (highTaxed + midTaxed + lowTaxed);
 			
-			System.out.println("Your yearly salary is £" + (annualEarnings));
+			System.out.println("Your yearly salary is £" + (annualEarnings + newPersonalAllowance));
 			System.out.println("You earn £" + (annualEarnings / 12) + " per month");
 			
 		}
